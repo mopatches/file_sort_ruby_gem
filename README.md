@@ -11,6 +11,7 @@ gem install file_sort
 
 ## Usage
 require 'file_sort'
+
 FileSort.new(filename, options).sort!
 
 ## Examples:
