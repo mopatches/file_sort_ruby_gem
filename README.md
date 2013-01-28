@@ -16,11 +16,11 @@ gem install file_sort
 ## Examples:
 Default sort (comma-delimited file, sort by first column as a number):
 
-    FileSort.new("my-large-file.tsv").sort!
+    FileSort.new("my-large-file.csv").sort!
 
 Sort with options (tab-delimited file, sort by second column as a string):
 
-    FileSort.new("my-large-file.csv", {
+    FileSort.new("my-large-file.tsv", {
       sort_column: 1,
       column_separator: "\t",
       parse_as: :string
