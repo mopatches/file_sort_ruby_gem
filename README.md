@@ -1,6 +1,7 @@
 # File Sort Ruby Gem
 
-Sorts files too large to fit in RAM using merge sort on temporary files on the hard drive.
+Sorts files too large to fit in RAM using merge sort on temporary files on the hard drive. Also known
+as an external sort.
 
 Files must be delimited text. E.g. CSV/comma-delimited or TSV/tab-delimited.
 
