@@ -31,6 +31,12 @@ Sort with options (comma-delimited file, sort by second column as a string):
 - **column_separator** - Character to split split on when parsing the input files. Default is "\t", a tab.
 - **num_processes** - Number of processes to use in parallel when sorting. Default is 3.
 - **parse_as** - Determines how the parsed sort column is compared. Default is :int, other possible values: :string
-- **lines_per_split** - The file to sort is split into many smaller temporary files that get sorted and merged together. This determines the size of the temporary files, in number of lines. Default is 1000000.
-- **replace_original** - Whether to replace the original file with the sorted version or not. Default is true, to replace. If false a sorted file is left in the same directory as the original file with a .sorted extension.
+- **lines_per_split** - The file to sort is split into many smaller temporary files that get sorted and merged
+together. This determines the size of the temporary files, in number of lines. Default is 1000000.
+- **replace_original** - Whether to replace the original file with the sorted version or not. Default is true,
+to replace. If false a sorted file is left in the same directory as the original file with a .sorted extension.
 - **log_output** - Show log/progress messages during sorting. Default is true, show messages.
+
+## Tips
+- **Performance:** - Set *num_processors* equal to or less than the number of cores on your computer.
+Set *lines_per_split* so that the temporary files come to around 100MB each.
