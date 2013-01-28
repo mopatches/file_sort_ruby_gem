@@ -3,7 +3,7 @@ class LargeFileGenerator
   DEFAULTS = {
       num_columns:        10,
       num_rows:           1e6.to_i,
-      column_separator:   "\t"
+      column_separator:   ","
   }
 
   def initialize(filename, options = {})

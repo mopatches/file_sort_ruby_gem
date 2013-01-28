@@ -2,7 +2,7 @@ class FileSort
 
   DEFAULTS = {
       sort_column:        0,
-      column_separator:   "\t",
+      column_separator:   ",",
       num_processes:      3,
       parse_as:           :int, #other options: :string
       lines_per_split:    1e6,
@@ -12,6 +12,7 @@ class FileSort
 
   def initialize(filename, options = {})
     @filename = filename
+    raise "File '#{@filename}' doesn't exist." unless File.exists?(@filename)
     @options = DEFAULTS.merge(options)
     @options[:lines_per_split] = @options[:lines_per_split].to_i
 
@@ -144,10 +145,11 @@ class FileSort
   end
 
   def seconds_to_pretty_time(num_seconds)
+    num_seconds = num_seconds.round(0).to_i
     hours = (num_seconds / (60**2)).to_i
     minutes = ((num_seconds % (60**2)) / 60).to_i
     padded_minutes = minutes < 10 ? "0#{minutes}" : minutes.to_s
-    seconds = num_seconds.round(0).to_i % 60
+    seconds = num_seconds % 60
     seconds_padded = seconds < 10 ? "0#{seconds}" : seconds.to_s
     return "#{hours}:#{padded_minutes}:#{seconds_padded}"
   end
@@ -160,4 +162,4 @@ class FileSort
 end
 
 #Run as
-#FileSort.new("large-file-1000000.csv", {parse_as: :string, sort_column: 1}).sort!
+#FileSort.new("large-file-10000000.csv", {parse_as: :int, replace_original: false}).sort!

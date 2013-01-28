@@ -28,7 +28,7 @@ Sort with options (comma-delimited file, sort by second column as a string):
 
 ## Options
 - **sort_column** - Index for which column to use when comparing rows. Default is 0, the first column.
-- **column_separator** - Character to split split on when parsing the input files. Default is "\t", a tab.
+- **column_separator** - Character to split split on when parsing the input files. Default is ",", a comma.
 - **num_processes** - Number of processes to use in parallel when sorting. Default is 3.
 - **parse_as** - Determines how the parsed sort column is compared. Default is :int, other possible values: :string
 - **lines_per_split** - The file to sort is split into many smaller temporary files that get sorted and merged
