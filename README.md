@@ -41,5 +41,5 @@ to replace. If false a sorted file is left in the same directory as the original
 - **Performance:** - Set *num_processors* equal to or less than the number of cores on your computer.
 Set *lines_per_split* so that the temporary files come to around 100MB each.
 - **Quoted-delimited files** - Parsing quoted-delimited files (e.g. CSVs with quoted fields) is much slower than
-parsing normal CSVs, so we don't. If you data needs to be quoted for the comma-separated format consider using
+parsing normal CSVs, so we don't. If your data needs to be quoted for the comma-separated format consider using
 the tab-separated format instead.
