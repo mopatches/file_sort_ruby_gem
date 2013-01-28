@@ -12,14 +12,14 @@ class Sorter
     lines = []
     infile = File.open(@input_filename)
     while line = infile.gets
-      line = line.chomp.split(@column_separator)
-      line[@sort_column] = line[@sort_column].to_i if @sort_as_int
-      lines << line
+      col = line.split(@column_separator, @sort_column + 2)[@sort_column]
+      col = col.to_i if @sort_as_int
+      lines << [col, line]
     end
     infile.close
-    lines.sort!{ |a, b| a[@sort_column] <=> b[@sort_column] }
+    lines.sort!{ |a, b| a[0] <=> b[0] }
     outfile = File.open(@sorted_filename, "w")
-    lines.each{ |line| outfile.puts(line.join(@column_separator)) }
+    lines.each{ |line| outfile.print line[1] }
     outfile.close
   end
 end

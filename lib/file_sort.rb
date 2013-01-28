@@ -162,4 +162,5 @@ class FileSort
 end
 
 #Run as
-#FileSort.new("large-file-10000000.csv", {parse_as: :int, replace_original: false}).sort!
+#FileSort.new("large-file-1000000.csv", {replace_original: false, lines_per_split: 100000}).sort!
+#FileSort.new("large-file-10000000.csv", {replace_original: false}).sort!
