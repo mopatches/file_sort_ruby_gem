@@ -4,8 +4,6 @@ Sorts files too large to fit in RAM using merge sort on temporary files on the h
 
 Files must be delimited text. E.g. CSV/comma-delimited or TSV/tab-delimited.
 
-Quoted-delimited files (e.g. CSVs with quotes) aren't currently supported. Written and tested on Ruby 1.9.3.
-
 ## Installation
     gem install file_sort
 
