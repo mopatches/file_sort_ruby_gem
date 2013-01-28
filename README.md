@@ -10,9 +10,8 @@ Quoted-delimited files (e.g. CSVs with quotes) aren't currently supported. Writt
 gem install file_sort
 
 ## Usage
-require 'file_sort'
-
-FileSort.new(filename, options).sort!
+    require 'file_sort'
+    FileSort.new(filename, options).sort!
 
 ## Examples:
 - FileSort.new("my-large-file.csv").sort!
