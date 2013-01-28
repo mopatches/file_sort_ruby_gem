@@ -14,8 +14,10 @@ gem install file_sort
     FileSort.new(filename, options).sort!
 
 ## Examples:
-- FileSort.new("my-large-file.csv").sort!
-- FileSort.new("my-large-file.csv", { sort_column: 1, column_separator: "," }).sort!
+Default sort (tab-delimited file, sort by first column as a number):
+    FileSort.new("my-large-file.tsv").sort!
+Sort with options (comma-delimited file, sort by second column as a string)
+    FileSort.new("my-large-file.csv", { sort_column: 1, column_separator: ",", parse_as: :string }).sort!
 
 ## Options
 - **sort_column** - Index for which column to use when comparing rows. Default is 0, the first column.
