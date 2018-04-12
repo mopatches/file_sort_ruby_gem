@@ -5,6 +5,7 @@ class Merger
     @output_filename    = ENV["output_filename"]
     @sort_column        = ENV["sort_column"].to_i
     @sort_as_int        = ENV["sort_as_int"] == "true"
+    @inverse            = ENV["inverse_sort"] == "true"
     @column_separator   = ENV["column_separator"]
   end
 
@@ -16,7 +17,7 @@ class Merger
     f1_line, f1_col = self.get_line(f1)
     f2_line, f2_col = self.get_line(f2)
     while !f1_line.nil? and !f2_line.nil?
-      if f1_col < f2_col
+      if @inverse ^ (f1_col < f2_col)
         outfile.print f1_line
         f1_line, f1_col = self.get_line(f1)
       else
