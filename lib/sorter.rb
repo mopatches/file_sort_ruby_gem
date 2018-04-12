@@ -5,6 +5,7 @@ class Sorter
     @sorted_filename    = ENV["sorted_filename"]
     @sort_column        = ENV["sort_column"].to_i
     @sort_as_int        = ENV["sort_as_int"] == "true"
+    @inverse            = ENV["inverse_sort"] == "true" ? -1 : 1
     @column_separator   = ENV["column_separator"]
   end
 
@@ -17,7 +18,7 @@ class Sorter
       lines << [col, line]
     end
     infile.close
-    lines.sort!{ |a, b| a[0] <=> b[0] }
+    lines.sort!{ |a, b| (a[0] <=> b[0]) * @inverse }
     outfile = File.open(@sorted_filename, "w")
     lines.each{ |line| outfile.print line[1] }
     outfile.close

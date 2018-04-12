@@ -28,6 +28,8 @@ Sort with options (tab-delimited file, sort by second column as a string):
 ## Options
 - **sort_column** - Index for which column to use when comparing rows. Default is 0, the first column.
 - **column_separator** - Character to split split on when parsing the input files. Default is ",", a comma.
+- **headers** - Treat the first line as a headers line and do not include it in sorting. Defaul is false
+- **inverse** - Make inverse sorting. Defaul is false
 Another popular option is "\t", a tab.
 - **num_processes** - Number of processes to use in parallel when sorting. Default is 3.
 - **parse_as** - Determines how the parsed sort column is compared. Default is :int, other possible values: :string

@@ -4,7 +4,9 @@ class FileSort
       sort_column:        0,
       column_separator:   ",",
       num_processes:      3,
+      headers:            false,
       parse_as:           :int, #other options: :string
+      inverse:            false,
       lines_per_split:    1e6,
       replace_original:   true,
       log_output:         true
@@ -48,7 +50,19 @@ class FileSort
     end
     @scheduler_thread.join
     final_name = "#{@filename}.sorted"
-    File.rename(@files_to_merge.first, final_name)
+    if @options[:headers]
+      infile = File.open(@files_to_merge.first)
+      outfile = File.open(final_name, "w")
+      outfile.print Thread.main.thread_variable_get :header
+      while line = infile.gets
+        outfile.print(line)
+      end
+      infile.close
+      outfile.close
+      File.delete @files_to_merge.first
+    else
+      File.rename(@files_to_merge.first, final_name)
+    end
     if @options[:replace_original]
       File.delete(@filename)
       File.rename(final_name, @filename)
@@ -64,6 +78,9 @@ class FileSort
       infile = File.open(@filename)
       output_filename = self.next_filename
       outfile = File.open(output_filename, "w")
+      if @options[:headers]
+        Thread.main.thread_variable_set :header, infile.gets
+      end
       while line = infile.gets
         if line_counter >= @options[:lines_per_split]
           outfile.close
@@ -96,6 +113,7 @@ class FileSort
           "sorted_filename"   => sorted_filename,
           "sort_column"       => @options[:sort_column].to_s,
           "sort_as_int"       => (@options[:parse_as] == :int ? "true" : "false"),
+          "inverse_sort"      => @options[:inverse].to_s,
           "column_separator"  => @options[:column_separator]
         }, "ruby #{File.join(File.dirname(__FILE__), 'sorter.rb')}")
       Process.waitpid(pid)
@@ -116,6 +134,7 @@ class FileSort
           "output_filename"   => output_filename,
           "sort_column"       => @options[:sort_column].to_s,
           "sort_as_int"       => (@options[:parse_as] == :int ? "true" : "false"),
+          "inverse_sort"      => @options[:inverse].to_s,
           "column_separator"  => @options[:column_separator]
         }, "ruby #{File.join(File.dirname(__FILE__), 'merger.rb')}")
       Process.waitpid(pid)
